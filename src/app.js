@@ -86,11 +86,22 @@ app.get("/students/:name",async(req,res)=>{
 try {
     const search_name=req.params.name;
     const studentData=await Student.findOne({ name:search_name})
-    res.status(201).send(studentData)
+    
+   
+        
+        if (studentData!=null) {
+            res.status(201).send(studentData)
+        } else {
+             res.status(500).send("Data not Found At Server");
+        }
+  
+       
+ 
+   
 
 
 } catch (e) {
-    res.status(400).send(e)
+    res.status(500).send(e)
     console.log(e);
     
 }
