@@ -63,6 +63,41 @@ app.post("/students",async(req,res)=>{
 
 })
 
+
+//getiing the data from database 
+app.get("/students",async(req,res)=>{
+
+    try {
+        const studentsData=await Student.find();
+        res.status(201).send(studentsData)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+   
+    
+})
+
+//endig the getting data
+
+
+// getting individusal data of student
+
+app.get("/students/:name",async(req,res)=>{
+try {
+    const search_name=req.params.name;
+    const studentData=await Student.findOne({ name:search_name})
+    res.status(201).send(studentData)
+
+
+} catch (e) {
+    res.status(400).send(e)
+    console.log(e);
+    
+}
+})
+//endig of getting individual data
+
+
 app.listen(port,()=>{
     console.log(`listening at port no ${port}`);
 });
