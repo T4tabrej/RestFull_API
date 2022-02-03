@@ -108,7 +108,20 @@ try {
 })
 //endig of getting individual data
 
-
+//updating the data using patch
+app.patch("/students/:id",async(req,res)=>{
+try {
+   const _id=req.params.id; 
+   const updatedData=await Student.findByIdAndUpdate(_id, req.body,{
+       new:true//it will reflect the updated value
+   })
+   res.status(200).send(updatedData)           
+} catch (e) {
+    res.status(404).send("Data not Found")
+    
+}
+})
+//ending of update the data end of video 4
 app.listen(port,()=>{
     console.log(`listening at port no ${port}`);
 });
