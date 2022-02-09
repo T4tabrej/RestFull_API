@@ -121,7 +121,27 @@ try {
     
 }
 })
-//ending of update the data end of video 4
+//for deleting the data
+app.delete("/students/:id",async (req,res)=>{
+    //getting the id from url
+    
+    try {
+        const id=req.params.id;
+        if (!id) {
+         res.status(400).send("Data is Not Found")
+        }
+        const delteData=await Student.findByIdAndDelete(id);
+        res.status(200).send(delteData)
+            
+        
+    }
+     catch (e) {
+        res.status(404).send("Data not Found")   
+    }
+})
 app.listen(port,()=>{
     console.log(`listening at port no ${port}`);
 });
+
+
+//this is complete rest api code from postman 
